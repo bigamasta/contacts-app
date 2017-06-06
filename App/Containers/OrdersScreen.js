@@ -1,5 +1,7 @@
 import React from 'react'
 import { Platform } from 'react-native'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { Container, Content } from 'native-base'
 // import I18n from 'react-native-i18n'
 
@@ -8,10 +10,17 @@ import { Container, Content } from 'native-base'
 import NavigationBar from '../Components/NavigationBar'
 import ContactListItem from '../Components/ContactListItem'
 
+import OrdersActions from '../Redux/OrdersRedux'
+
 // Styles
 // import styles from './Styles/LaunchScreenStyles'
 
-export default class LaunchScreen extends React.Component {
+class LaunchScreen extends React.Component {
+  componentWillMount () {
+    const { contacts } = this.props
+    console.log('contacts', contacts)
+  }
+
   render () {
     return (
       <Container>
@@ -32,3 +41,15 @@ export default class LaunchScreen extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    contacts: state.orders.contacts
+  }
+}
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators(OrdersActions, dispatch)
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(LaunchScreen)

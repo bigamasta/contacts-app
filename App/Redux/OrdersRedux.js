@@ -4,21 +4,21 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  userRequest: ['username'],
-  userSuccess: ['avatar'],
-  userFailure: null
+  contactsRequest: null,
+  contactsSuccess: ['contacts'],
+  contactsFailure: null
 })
 
-export const GithubTypes = Types
+export const OrdersTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  avatar: null,
   fetching: null,
   error: null,
-  username: null
+  username: null,
+  contacts: null
 })
 
 /* ------------- Reducers ------------- */
@@ -29,18 +29,18 @@ export const request = (state, { username }) =>
 
 // successful temperature lookup
 export const success = (state, action) => {
-  const { avatar } = action
-  return state.merge({ fetching: false, error: null, avatar })
+  const { contacts } = action
+  return state.merge({ fetching: false, error: null, contacts })
 }
 
 // failed to get the temperature
 export const failure = (state) =>
-  state.merge({ fetching: false, error: true, avatar: null })
+  state.merge({ fetching: false, error: true, contacts: null })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.USER_REQUEST]: request,
-  [Types.USER_SUCCESS]: success,
-  [Types.USER_FAILURE]: failure
+  [Types.CONTACTS_REQUEST]: request,
+  [Types.CONTACTS_SUCCESS]: success,
+  [Types.CONTACTS_FAILURE]: failure
 })
