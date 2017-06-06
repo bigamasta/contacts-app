@@ -51,3 +51,6 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+
+# Tests snapshots
+Tests/Components/__snapshots__
