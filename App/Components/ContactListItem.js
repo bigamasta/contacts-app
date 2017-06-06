@@ -1,3 +1,4 @@
+// @Flow
 import React from 'react'
 import { ListItem, Thumbnail, Text, Body, Left } from 'native-base'
 import { View } from 'react-native'
@@ -7,25 +8,25 @@ import { setPropTypes, defaultProps } from 'recompose'
 import styles from './Styles/ContactListItemStyle'
 import { Images } from '../Themes'
 
-const ContactListItem = ({ avatarSource, contactName, contactTelephone, onClick }) =>
+const ContactListItem = ({ avatarPhantom, name, phone, pictureUrl }: { name: string, phone: string, pictureUrl?: string }) =>
   <View style={styles.item}>
     <ListItem avatar>
       <Left>
-        <Thumbnail square source={avatarSource} />
+        <Thumbnail square source={pictureUrl ? { uri: pictureUrl } : avatarPhantom} />
       </Left>
       <Body style={styles.itemBody}>
-        <Text>{contactName}</Text>
-        <Text note>{contactTelephone}</Text>
+        <Text>{name}</Text>
+        <Text note>{phone}</Text>
       </Body>
     </ListItem>
     <View style={styles.divider} />
   </View>
 
 const enhance = defaultProps({
-  avatarSource: Images.ignite
+  avatarPhantom: Images.ignite
 })
 
 export default enhance(setPropTypes({
-  contactTelephone: PropTypes.string.isRequired,
-  contactName: PropTypes.string.isRequired
+  phone: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 })(ContactListItem))

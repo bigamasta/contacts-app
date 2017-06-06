@@ -2,9 +2,9 @@ import { call, put } from 'redux-saga/effects'
 import { path } from 'ramda'
 import OrdersActions from '../Redux/OrdersRedux'
 
-export function * getContacts (api, action) {
+export function * getContacts (api) {
   // make the call to the api
-  const response = yield call(api.get)
+  const response = yield call(api.getContacts)
 
   if (response.ok) {
     const contacts = path(['data', 'items'], response)
