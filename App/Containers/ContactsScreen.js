@@ -18,10 +18,12 @@ import OrdersActions, { ContactType } from '../Redux/OrdersRedux'
 // Styles
 // import styles from './Styles/LaunchScreenStyles'
 
-const LaunchScreen = ({ contacts }: { contacts: ?ContactType }): () => mixed =>
+const ContactsScreen = ({ contacts, navigation: { navigate } }: { contacts: ?ContactType }): () => mixed =>
   <Container>
     <NavigationBar title='Orders' withAdd={Platform.OS === 'ios'} />
-    <ContactsList contacts={contacts} />
+    <ContactsList contacts={contacts} onContactPress={(contact: ContactType): void =>
+      navigate('OrderScreen', { contact })
+    } />
   </Container>
 
 const mapStateToProps = (state) => {
@@ -43,6 +45,6 @@ const withConfig = lifecycle({
   }
 })
 
-const enhance = withConfig(LaunchScreen)
+const enhance = withConfig(ContactsScreen)
 
 export default connect(mapStateToProps, mapDispatchToProps)(enhance)

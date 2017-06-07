@@ -7,6 +7,10 @@ export default () => {
     // If ReactNative's yellow box warnings are too much, it is possible to turn
     // it off, but the healthier approach is to fix the warnings.  =)
     console.disableYellowBox = !DebugConfig.yellowBox
+    // https://github.com/facebook/react-native/issues/12981
+    console.ignoredYellowBox = [
+      'Setting a timer'
+    ]
   }
 
   // Allow/disallow font-scaling in app

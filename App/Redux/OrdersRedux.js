@@ -10,10 +10,16 @@ export type ContactType = {
   pictureUrl?: string
 }
 
+export type OrderType = {
+  name: ?string,
+  count: ?string
+}
+
 type StateType = {
   fetching: boolean,
   error: boolean,
-  contacts: Array<ContactType>
+  contacts: Array<ContactType>,
+  orders: Array<OrderType>
 }
 
 /* ------------- Types and Action Creators ------------- */
@@ -21,7 +27,10 @@ type StateType = {
 const { Types, Creators } = createActions({
   contactsRequest: null,
   contactsSuccess: ['contacts'],
-  contactsFailure: null
+  contactsFailure: null,
+  fetchOrdersRequest: null,
+  fetchOrdersSuccess: ['orders'],
+  fetchOrdersFailure: null
 })
 
 export const OrdersTypes = Types
@@ -32,29 +41,28 @@ export default Creators
 export const INITIAL_STATE: StateType = Immutable({
   fetching: null,
   error: null,
-  contacts: null
+  contacts: null,
+  orders: null
 })
 
 /* ------------- Reducers ------------- */
 
-// request the temperature for a city
 export const request = (state: StateType) =>
   state.merge({ fetching: true })
 
-// successful temperature lookup
-export const success = (state: StateType, action) => {
-  const { contacts } = action
-  return state.merge({ fetching: false, error: null, contacts })
-}
+export const success = (path) => (state: StateType, action) =>
+  state.merge({ fetching: false, error: null, [path]: action[path] })
 
-// failed to get the temperature
-export const failure = (state: StateType) =>
-  state.merge({ fetching: false, error: true, contacts: null })
+export const failure = (path) => (state: StateType) =>
+  state.merge({ fetching: false, error: true, [path]: null })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CONTACTS_REQUEST]: request,
-  [Types.CONTACTS_SUCCESS]: success,
-  [Types.CONTACTS_FAILURE]: failure
+  [Types.CONTACTS_SUCCESS]: success('contacts'),
+  [Types.CONTACTS_FAILURE]: failure('contacts'),
+  [Types.FETCH_ORDERS_REQUEST]: request,
+  [Types.FETCH_ORDERS_SUCCESS]: success('orders'),
+  [Types.FETCH_ORDERS_FAILURE]: failure('orders')
 })

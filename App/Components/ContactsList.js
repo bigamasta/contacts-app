@@ -6,11 +6,14 @@ import { setPropTypes } from 'recompose'
 import ContactListItem from './ContactListItem'
 import { ContactType } from '../Redux/OrdersRedux'
 
-const ContactsList = ({ contacts }: { contacts: Array<ContactType> }) =>
+const ContactsList = ({ contacts, onContactPress }: { contacts: Array<ContactType>, onContactPress: () => mixed }) =>
   <Container>
     <Content>
-      {contacts ? contacts.map(({ name, phone, pictureUrl }) =>
-        <ContactListItem key={name + phone} name={name} phone={phone} pictureUrl={pictureUrl} />
+      {contacts ? contacts.map((contact: ContactType) =>
+        <ContactListItem
+          key={contact.name + contact.phone}
+          contact={contact}
+          onContactPress={onContactPress} />
       ) : null}
     </Content>
   </Container>

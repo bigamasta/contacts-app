@@ -14,7 +14,7 @@ import { OrdersTypes } from '../Redux/OrdersRedux'
 import { startup } from './StartupSagas'
 import { login } from './LoginSagas'
 // import { getUserAvatar } from './GithubSagas'
-import { getContacts } from './OrdersSagas'
+import { getContacts, getOrders } from './OrdersSagas'
 
 /* ------------- API ------------- */
 
@@ -29,7 +29,8 @@ export default function * root () {
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
     takeLatest(LoginTypes.LOGIN_REQUEST, login),
-    takeLatest(OrdersTypes.CONTACTS_REQUEST, getContacts, api)
+    takeLatest(OrdersTypes.CONTACTS_REQUEST, getContacts, api),
+    takeLatest(OrdersTypes.FETCH_ORDERS_REQUEST, getOrders, api)
 
     // some sagas receive extra parameters in addition to an action
     // takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api)

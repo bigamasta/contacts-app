@@ -1,20 +1,22 @@
 import { StackNavigator } from 'react-navigation'
-import OrdersScreen from '../Containers/OrdersScreen'
-import LoginScreen from '../Containers/LoginScreen'
+import ContactsScreen from '../Containers/ContactsScreen'
+import OrderScreen from '../Containers/OrderScreen'
 
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  OrdersScreen: { screen: OrdersScreen },
-  LoginScreen: {
-    screen: LoginScreen,
+  ContactsScreen: {
+    screen: ContactsScreen,
     navigationOptions: { title: 'Login' }
+  },
+  OrderScreen: {
+    screen: OrderScreen
   }
 }, {
   // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'OrdersScreen',
+  initialRouteName: 'ContactsScreen',
   navigationOptions: {
     headerStyle: styles.header
   }

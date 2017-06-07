@@ -38,6 +38,7 @@ const create = (baseURL = 'http://private-36f1e-contactstest.apiary-mock.com/') 
   // const getRate = () => api.get('rate_limit')
   // const getUser = (username) => api.get('search/users', {q: username})
   const getContacts = () => api.get('contacts')
+  const getOrders = (id) => api.get(`contacts/${id}/order`)
   // ------
   // STEP 3
   // ------
@@ -55,7 +56,8 @@ const create = (baseURL = 'http://private-36f1e-contactstest.apiary-mock.com/') 
     // getRoot,
     // getRate,
     // getUser,
-    getContacts
+    getContacts,
+    getOrders
   }
 }
 
