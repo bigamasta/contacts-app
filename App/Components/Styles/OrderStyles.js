@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
-  someStyles: {
+  textContainerStyles: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingRight: 30
   }
 })

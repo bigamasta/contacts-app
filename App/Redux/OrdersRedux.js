@@ -25,9 +25,9 @@ type StateType = {
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  contactsRequest: null,
-  contactsSuccess: ['contacts'],
-  contactsFailure: null,
+  fetchContactsRequest: null,
+  fetchContactsSuccess: ['contacts'],
+  fetchContactsFailure: null,
   fetchOrdersRequest: null,
   fetchOrdersSuccess: ['orders'],
   fetchOrdersFailure: null
@@ -59,9 +59,9 @@ export const failure = (path) => (state: StateType) =>
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.CONTACTS_REQUEST]: request,
-  [Types.CONTACTS_SUCCESS]: success('contacts'),
-  [Types.CONTACTS_FAILURE]: failure('contacts'),
+  [Types.FETCH_CONTACTS_REQUEST]: request,
+  [Types.FETCH_CONTACTS_SUCCESS]: success('contacts'),
+  [Types.FETCH_CONTACTS_FAILURE]: failure('contacts'),
   [Types.FETCH_ORDERS_REQUEST]: request,
   [Types.FETCH_ORDERS_SUCCESS]: success('orders'),
   [Types.FETCH_ORDERS_FAILURE]: failure('orders')

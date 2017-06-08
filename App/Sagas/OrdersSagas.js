@@ -10,9 +10,9 @@ export function * getContacts (api) {
     const contacts = path(['data', 'items'], response)
 
     // do data conversion here if needed
-    yield put(OrdersActions.contactsSuccess(contacts))
+    yield put(OrdersActions.fetchContactsSuccess(contacts))
   } else {
-    yield put(OrdersActions.contactsFailure())
+    yield put(OrdersActions.fetchContactsFailure())
   }
 }
 

@@ -5,12 +5,12 @@ import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import { setPropTypes } from 'recompose'
 
-// import styles from './Styles/ContactListItemStyle'
+import styles from './Styles/ContactDetailsStyle'
 const ContactDetails = ({ details }) =>
   <View>
     {Object.keys(details).map(header =>
-      <View style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 10, paddingBottom: 10, backgroundColor: '#57e06c' }} key={header + details[header]}>
-        <Text style={{ fontWeight: 'bold' }}>{header}</Text>
+      <View style={styles.detailContainer} key={header + details[header]}>
+        <Text style={styles.detailKey}>{header}</Text>
         <Text>{details[header]}</Text>
       </View>
     )}

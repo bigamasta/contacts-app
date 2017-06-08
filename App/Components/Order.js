@@ -4,14 +4,10 @@ import { ListItem, Text, Body } from 'native-base'
 import PropTypes from 'prop-types'
 import { setPropTypes } from 'recompose'
 
-// import styles from './Styles/OrderStyles'
+import styles from './Styles/OrderStyles'
 const Order = ({ name, count }: { name: string, count: number }) =>
   <ListItem>
-    <Body style={{
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      paddingRight: 30
-    }}>
+    <Body style={styles.textContainerStyles}>
       <Text>{name}</Text>
       <Text>{count}x</Text>
     </Body>

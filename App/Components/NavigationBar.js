@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 import { Header, Left, Button, Icon, Body, Title, Right } from 'native-base'
 import { setPropTypes } from 'recompose'
 
+import styles from './Styles/NavigationBarStyles'
+
 const NavigationBar = ({ title, withAdd, back, menu = true, onBackPress }) =>
   <Header>
-    <Left style={{ flexDirection: 'row' }}>
+    <Left style={styles.iconGroup}>
       {back && <Button transparent onPress={() => onBackPress()}>
         <Icon name='arrow-back' />
       </Button>}

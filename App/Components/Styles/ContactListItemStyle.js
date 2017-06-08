@@ -1,4 +1,6 @@
-export default {
+import { StyleSheet } from 'react-native'
+
+export default StyleSheet.create({
   divider: {
     height: 1,
     marginLeft: 17,
@@ -13,4 +15,4 @@ export default {
   item: {
     paddingTop: 10
   }
-}
+})

@@ -34,7 +34,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
   actions: {
-    fetchContacts: () => dispatch(OrdersActions.contactsRequest())
+    fetchContacts: () => dispatch(OrdersActions.fetchContactsRequest())
   }
 })
 
