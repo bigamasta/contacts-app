@@ -5,15 +5,10 @@ import DebugConfig from '../Config/DebugConfig'
 
 /* ------------- Types ------------- */
 
-import { StartupTypes } from '../Redux/StartupRedux'
-import { LoginTypes } from '../Redux/LoginRedux'
 import { OrdersTypes } from '../Redux/OrdersRedux'
 
 /* ------------- Sagas ------------- */
 
-import { startup } from './StartupSagas'
-import { login } from './LoginSagas'
-// import { getUserAvatar } from './GithubSagas'
 import { getContacts, getOrders } from './OrdersSagas'
 
 /* ------------- API ------------- */
@@ -27,12 +22,7 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 export default function * root () {
   yield [
     // some sagas only receive an action
-    takeLatest(StartupTypes.STARTUP, startup),
-    takeLatest(LoginTypes.LOGIN_REQUEST, login),
     takeLatest(OrdersTypes.CONTACTS_REQUEST, getContacts, api),
     takeLatest(OrdersTypes.FETCH_ORDERS_REQUEST, getOrders, api)
-
-    // some sagas receive extra parameters in addition to an action
-    // takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api)
   ]
 }
