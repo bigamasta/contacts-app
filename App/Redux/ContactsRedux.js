@@ -3,24 +3,25 @@ import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 
 /* ------------- State Type ------------- */
-
-export type OrderType = {
+export type ContactType = {
+  id: ?string,
   name: ?string,
-  count: ?string
+  phone: ?string,
+  pictureUrl?: string
 }
 
 type StateType = {
   fetching: boolean,
   error: boolean,
-  orders: Array<OrderType>
+  contacts: Array<ContactType>,
 }
 
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  fetchOrdersRequest: null,
-  fetchOrdersSuccess: ['orders'],
-  fetchOrdersFailure: null
+  fetchContactsRequest: null,
+  fetchContactsSuccess: ['contacts'],
+  fetchContactsFailure: null
 })
 
 export const OrdersTypes = Types
@@ -31,7 +32,7 @@ export default Creators
 export const INITIAL_STATE: StateType = Immutable({
   fetching: null,
   error: null,
-  orders: null
+  contacts: null
 })
 
 /* ------------- Reducers ------------- */
@@ -48,7 +49,7 @@ export const failure = (path) => (state: StateType) =>
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.FETCH_ORDERS_REQUEST]: request,
-  [Types.FETCH_ORDERS_SUCCESS]: success('orders'),
-  [Types.FETCH_ORDERS_FAILURE]: failure('orders')
+  [Types.FETCH_CONTACTS_REQUEST]: request,
+  [Types.FETCH_CONTACTS_SUCCESS]: success('contacts'),
+  [Types.FETCH_CONTACTS_FAILURE]: failure('contacts')
 })

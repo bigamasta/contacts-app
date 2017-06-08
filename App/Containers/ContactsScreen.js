@@ -13,7 +13,7 @@ import NavigationBar from '../Components/NavigationBar'
 // import ContactListItem from '../Components/ContactListItem'
 import ContactsList from '../Components/ContactsList'
 
-import OrdersActions, { ContactType } from '../Redux/OrdersRedux'
+import OrdersActions, { ContactType } from '../Redux/ContactsRedux'
 
 // Styles
 // import styles from './Styles/LaunchScreenStyles'
@@ -22,13 +22,13 @@ const ContactsScreen = ({ navBarConfig, contacts, navigation: { navigate } }: { 
   <Container>
     <NavigationBar {...navBarConfig} />
     <ContactsList contacts={contacts} onContactPress={(contact: ContactType): void =>
-      navigate('OrderScreen', { contact })
+      navigate('Order', { contact })
     } />
   </Container>
 
 const mapStateToProps = (state) => {
   return {
-    contacts: state.orders.contacts
+    contacts: state.contacts.contacts
   }
 }
 

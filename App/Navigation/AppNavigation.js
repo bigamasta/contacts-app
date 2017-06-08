@@ -6,10 +6,10 @@ import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  ContactsScreen: {
+  Contacts: {
     screen: ContactsScreen
   },
-  OrderScreen: {
+  Order: {
     screen: OrderScreen
   }
 }, {
