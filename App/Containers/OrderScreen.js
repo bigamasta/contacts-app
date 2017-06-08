@@ -1,9 +1,8 @@
 // @Flow
 import React from 'react'
-import { Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { Container } from 'native-base'
-import { lifecycle } from 'recompose'
+import { lifecycle, compose, mapProps } from 'recompose'
 
 import NavigationBar from '../Components/NavigationBar'
 import ContactDetails from '../Components/ContactDetails'
@@ -14,15 +13,12 @@ import OrdersActions from '../Redux/OrdersRedux'
 // Styles
 // import styles from './Styles/LaunchScreenStyles'
 
-const OrderScreen = ({ navigation: { state: { params: { contact: { id, phone, name } } } }, orders }) => {
-  console.tron.log('id' + id)
-  console.tron.log('phone' + phone)
-  return <Container>
-    <NavigationBar title={name} withAdd={Platform.OS === 'ios'} />
-    <ContactDetails details={{ 'Phone': phone }} />
+const OrderScreen = ({ navBarConfig, contactDetails, orders }) =>
+  <Container>
+    <NavigationBar {...navBarConfig} />
+    <ContactDetails details={contactDetails} />
     <Orders orders={orders} />
   </Container>
-}
 
 const mapStateToProps = (state) => {
   return {
@@ -36,7 +32,28 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-const withConfig = lifecycle({
+const withNavBarConfig = mapProps(
+  (props) => ({
+    navBarConfig: {
+      back: true,
+      menu: true,
+      onBackPress: props.navigation.goBack,
+      title: props.navigation.state.params.contact.name
+    },
+    ...props
+  })
+)
+
+const withContactDetails = mapProps(
+  (props) => ({
+    contactDetails: {
+      'Phone': props.navigation.state.params.contact.phone
+    },
+    ...props
+  })
+)
+
+const withLifecycle = lifecycle({
   componentWillMount () {
     const { actions: { fetchOrders },
             navigation: { state: { params: { contact: { id } } } } } = this.props
@@ -44,6 +61,11 @@ const withConfig = lifecycle({
   }
 })
 
-const enhance = withConfig(OrderScreen)
+const enhance = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withNavBarConfig,
+  withContactDetails,
+  withLifecycle
+)
 
-export default connect(mapStateToProps, mapDispatchToProps)(enhance)
+export default enhance(OrderScreen)

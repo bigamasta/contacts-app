@@ -7,8 +7,7 @@ import styles from './Styles/NavigationStyles'
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
   ContactsScreen: {
-    screen: ContactsScreen,
-    navigationOptions: { title: 'Login' }
+    screen: ContactsScreen
   },
   OrderScreen: {
     screen: OrderScreen

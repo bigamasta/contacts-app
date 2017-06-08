@@ -3,9 +3,12 @@ import PropTypes from 'prop-types'
 import { Header, Left, Button, Icon, Body, Title, Right } from 'native-base'
 import { setPropTypes } from 'recompose'
 
-const NavigationBar = ({ title, withAdd }) =>
+const NavigationBar = ({ title, withAdd, back, menu = true, onBackPress }) =>
   <Header>
-    <Left>
+    <Left style={{ flexDirection: 'row' }}>
+      {back && <Button transparent onPress={() => onBackPress()}>
+        <Icon name='arrow-back' />
+      </Button>}
       <Button transparent>
         <Icon name='people' />
       </Button>
@@ -17,12 +20,16 @@ const NavigationBar = ({ title, withAdd }) =>
       {withAdd && <Button transparent>
         <Icon name='add' />
       </Button>}
-      <Button transparent>
+      {menu && <Button transparent>
         <Icon name='more' />
-      </Button>
+      </Button>}
     </Right>
   </Header>
 
 export default setPropTypes({
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  withAdd: PropTypes.bool,
+  back: PropTypes.bool,
+  menu: PropTypes.bool,
+  onBackPress: PropTypes.func
 })(NavigationBar)
