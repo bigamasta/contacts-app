@@ -5,11 +5,15 @@ import DebugConfig from '../Config/DebugConfig'
 
 /* ------------- Types ------------- */
 
+import { AddContactTypes } from '../Redux/AddContactRedux'
+import { ContactsTypes } from '../Redux/ContactsRedux'
 import { OrdersTypes } from '../Redux/OrdersRedux'
 
 /* ------------- Sagas ------------- */
 
-import { getContacts, getOrders } from './OrdersSagas'
+import { createContact } from './AddContactSagas'
+import { getContacts } from './ContactsSagas'
+import { getOrders } from './OrdersSagas'
 
 /* ------------- API ------------- */
 
@@ -22,7 +26,8 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 export default function * root () {
   yield [
     // some sagas only receive an action
-    takeLatest(OrdersTypes.CONTACTS_REQUEST, getContacts, api),
+    takeLatest(AddContactTypes.CREATE_CONTACT_REQUEST, createContact, api),
+    takeLatest(ContactsTypes.FETCH_CONTACTS_REQUEST, getContacts, api),
     takeLatest(OrdersTypes.FETCH_ORDERS_REQUEST, getOrders, api)
   ]
 }

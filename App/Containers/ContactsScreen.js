@@ -18,7 +18,7 @@ import OrdersActions, { ContactType } from '../Redux/ContactsRedux'
 // Styles
 // import styles from './Styles/LaunchScreenStyles'
 
-const ContactsScreen = ({ navBarConfig, contacts, navigation: { navigate } }: { contacts: ?ContactType }): () => mixed =>
+const ContactsScreen = ({ navBarConfig, contacts, navigation: { navigate } }: { contacts: ?Array<ContactType> }): () => mixed =>
   <Container>
     <NavigationBar {...navBarConfig} />
     <ContactsList contacts={contacts} onContactPress={(contact: ContactType): void =>

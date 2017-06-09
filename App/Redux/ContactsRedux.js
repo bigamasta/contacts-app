@@ -24,7 +24,7 @@ const { Types, Creators } = createActions({
   fetchContactsFailure: null
 })
 
-export const OrdersTypes = Types
+export const ContactsTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */

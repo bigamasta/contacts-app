@@ -1,6 +1,4 @@
-import { StyleSheet } from 'react-native'
-
-export default StyleSheet.create({
+export default {
   detailContainer: {
     paddingLeft: 30,
     paddingRight: 30,
@@ -11,4 +9,4 @@ export default StyleSheet.create({
   detailKey: {
     fontWeight: 'bold'
   }
-})
+}

@@ -1,3 +1,7 @@
 {
    "orders": "Orders",
+   "addNewContact": "Add New Contact",
+   "firstAndLastName": "First and Last Name",
+   "phone": "Phone",
+   "add": "Add"
 }

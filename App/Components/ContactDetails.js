@@ -5,7 +5,7 @@ import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import { setPropTypes } from 'recompose'
 
-import styles from './Styles/ContactDetailsStyle'
+import styles from './Styles/ContactDetailsStyles'
 const ContactDetails = ({ details }) =>
   <View>
     {Object.keys(details).map(header =>
