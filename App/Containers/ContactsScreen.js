@@ -3,7 +3,7 @@ import React from 'react'
 import { Platform } from 'react-native'
 // import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Container, Fab, Icon } from 'native-base'
+import { Container } from 'native-base'
 import { lifecycle, withProps, compose } from 'recompose'
 // import I18n from 'react-native-i18n'
 
@@ -12,6 +12,7 @@ import { lifecycle, withProps, compose } from 'recompose'
 import NavigationBar from '../Components/NavigationBar'
 // import ContactListItem from '../Components/ContactListItem'
 import ContactsList from '../Components/ContactsList'
+import AddContactFAB from '../Components/AddContactFAB'
 
 import OrdersActions, { ContactType } from '../Redux/ContactsRedux'
 
@@ -24,13 +25,7 @@ const ContactsScreen = ({ navBarConfig, contacts, showFAB, navigation: { navigat
     <ContactsList contacts={contacts} onContactPress={(contact: ContactType): void =>
       navigate('Order', { contact })
     } />
-    {showFAB && <Fab
-      active
-      style={{ backgroundColor: '#5067FF' }}
-      position='bottomRight'
-      onPress={() => navigate('AddContact')}>
-      <Icon name='add' />
-    </Fab>}
+    {showFAB && <AddContactFAB onPress={() => navigate('AddContact')} />}
   </Container>
 
 const mapStateToProps = (state) => {
