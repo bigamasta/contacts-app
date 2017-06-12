@@ -1,7 +1,7 @@
 import { StackNavigator } from 'react-navigation'
 import AddContactScreen from '../Containers/AddContactScreen'
 import ContactsScreen from '../Containers/ContactsScreen'
-import OrderScreen from '../Containers/OrderScreen'
+import OrdersScreen from '../Containers/OrdersScreen'
 
 import styles from './Styles/NavigationStyles'
 
@@ -14,7 +14,7 @@ const PrimaryNav = StackNavigator({
     screen: ContactsScreen
   },
   Order: {
-    screen: OrderScreen
+    screen: OrdersScreen
   }
 }, {
   // Default config for all screens
