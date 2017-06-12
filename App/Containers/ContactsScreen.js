@@ -32,7 +32,7 @@ const ContactsScreen = ({ navBarConfig, contacts, showFAB, navigation: { navigat
       <ContactsList contacts={contacts} onContactPress={(contact: ContactType): void =>
         navigate('Order', { contact })
       } />
-      {showFAB && <AddContactFAB onPress={() => navigate('AddContact')} />}
+      {showFAB && <AddContactFAB onLog={() => navigate('AddContact')} />}
     </Container>
 
 const mapStateToProps = (state) => {

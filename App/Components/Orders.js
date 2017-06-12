@@ -8,7 +8,11 @@ import Order from './Order'
 import { OrderType } from '../Redux/OrdersRedux'
 import styles from './Styles/OrdersStyles'
 
-const Orders = ({ orders }: { orders: Array<OrderType> }) =>
+type PropsType = {
+  orders: Array<OrderType>
+}
+
+const Orders = ({ orders }: PropsType): () => mixed =>
   <Container>
     <Content>
       {orders ? orders.map(({ name, count }) =>

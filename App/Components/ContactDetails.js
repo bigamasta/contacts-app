@@ -6,7 +6,8 @@ import PropTypes from 'prop-types'
 import { setPropTypes } from 'recompose'
 
 import styles from './Styles/ContactDetailsStyles'
-const ContactDetails = ({ details }) =>
+
+const ContactDetails = ({ details }: { details: {}}) =>
   <View>
     {Object.keys(details).map(header =>
       <View style={styles.detailContainer} key={header + details[header]}>

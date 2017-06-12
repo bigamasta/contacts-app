@@ -1,9 +1,18 @@
+// @Flow
 import React from 'react'
 import I18n from 'react-native-i18n'
 import { Container, Content, Form, Item, Input, Button, Text } from 'native-base'
 
-const AddContactForm = ({ onSubmit, onFirstNameAndLastNameChange, onPhoneChange, firstAndLastName, phone }:
-  { onSubmit: () => void, onFirstNameAndLastNameChange: () => void, onPhoneChange: () => void }): () => mixed =>
+type PropsType = {
+  onSubmit: () => void,
+  onFirstNameAndLastNameChange: () => void,
+  onPhoneChange: () => void,
+  firstAndLastName: string,
+  phone: string
+}
+
+const AddContactForm = ({ onSubmit, onFirstNameAndLastNameChange, onPhoneChange,
+  firstAndLastName, phone }: PropsType): () => mixed =>
     <Container>
       <Content>
         <Form>

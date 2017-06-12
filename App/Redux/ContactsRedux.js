@@ -5,9 +5,9 @@ import Immutable from 'seamless-immutable'
 /* ------------- State Type ------------- */
 
 export type ContactType = {
-  id: ?string,
-  name: ?string,
-  phone: ?string,
+  id: string,
+  name: string,
+  phone: string,
   pictureUrl?: string
 }
 

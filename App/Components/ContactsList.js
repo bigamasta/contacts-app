@@ -6,7 +6,12 @@ import { setPropTypes } from 'recompose'
 import ContactListItem from './ContactListItem'
 import { ContactType } from '../Redux/OrdersRedux'
 
-const ContactsList = ({ contacts, onContactPress }: { contacts: Array<ContactType>, onContactPress: () => mixed }) =>
+type PropsType = {
+  contacts: Array<ContactType>,
+  onContactPress: () => mixed
+}
+
+const ContactsList = ({ contacts, onContactPress }: PropsType): () => mixed =>
   <Container>
     <Content>
       {contacts ? contacts.map((contact: ContactType) =>

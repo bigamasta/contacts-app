@@ -5,7 +5,13 @@ import PropTypes from 'prop-types'
 import { setPropTypes } from 'recompose'
 
 import styles from './Styles/OrderStyles'
-const Order = ({ name, count }: { name: string, count: number }) =>
+
+type PropsType = {
+  name: string,
+  count: number
+}
+
+const Order = ({ name, count }: PropsType): () => mixed =>
   <ListItem>
     <Body style={styles.textContainerStyles}>
       <Text>{name}</Text>

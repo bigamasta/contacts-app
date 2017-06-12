@@ -9,10 +9,13 @@ import { ContactType } from '../Redux/OrdersRedux'
 import styles from './Styles/ContactListItemStyle'
 import { Images } from '../Themes'
 
-const ContactListItem = ({ avatarPhantom, contact, onContactPress }:
-  { contact: ContactType, onContactPress: () => mixed }) => {
-  const { name, phone, pictureUrl } = contact
-  return <View style={styles.item}>
+type PropsType = {
+  contact: ContactType,
+  onContactPress: () => mixed
+}
+
+const ContactListItem = ({ avatarPhantom, contact, contact: { name, phone, pictureUrl }, onContactPress }: PropsType): () => mixed =>
+  <View style={styles.item}>
     <ListItem avatar button onPress={() => onContactPress(contact)}>
       <Left>
         <Thumbnail square source={pictureUrl ? { uri: pictureUrl } : avatarPhantom} />
@@ -24,9 +27,8 @@ const ContactListItem = ({ avatarPhantom, contact, onContactPress }:
     </ListItem>
     <View style={styles.divider} />
   </View>
-}
 
-const enhance = defaultProps({
+const enhance: () => mixed = defaultProps({
   avatarPhantom: Images.ignite
 })
 

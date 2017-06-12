@@ -1,3 +1,4 @@
+// @Flow
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Header, Left, Button, Icon, Body, Title, Right } from 'native-base'
@@ -5,7 +6,15 @@ import { setPropTypes } from 'recompose'
 
 import styles from './Styles/NavigationBarStyles'
 
-const NavigationBar = ({ title, withAdd, withBack, withMenu, onBackPress }) =>
+export type NavBarConfigType = {
+  title: string,
+  withMenu?: boolean,
+  withBack?: boolean,
+  withAdd?: boolean,
+  onBackPress?: () => void
+}
+
+const NavigationBar = ({ title, withAdd, withBack, withMenu, onBackPress }: NavBarConfigType): () => mixed =>
   <Header>
     <Left style={styles.iconGroup}>
       {withBack && <Button transparent onPress={() => onBackPress()}>
@@ -27,14 +36,6 @@ const NavigationBar = ({ title, withAdd, withBack, withMenu, onBackPress }) =>
       </Button>}
     </Right>
   </Header>
-
-export type NavBarConfigType = {
-  title?: string,
-  withMenu?: boolean,
-  withBack?: boolean,
-  withAdd?: boolean,
-  onBackPress?: () => void
-}
 
 export default setPropTypes({
   title: PropTypes.string.isRequired,
