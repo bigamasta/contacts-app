@@ -11,7 +11,7 @@ import { OrdersTypes } from '../Redux/OrdersRedux'
 
 /* ------------- Sagas ------------- */
 
-import { createContact } from './AddContactSagas'
+import { createContact, appendContactToContacts } from './AddContactSagas'
 import { getContacts } from './ContactsSagas'
 import { getOrders } from './OrdersSagas'
 
@@ -28,6 +28,7 @@ export default function * root () {
     // some sagas only receive an action
     takeLatest(AddContactTypes.CREATE_CONTACT_REQUEST, createContact, api),
     takeLatest(ContactsTypes.FETCH_CONTACTS_REQUEST, getContacts, api),
-    takeLatest(OrdersTypes.FETCH_ORDERS_REQUEST, getOrders, api)
+    takeLatest(OrdersTypes.FETCH_ORDERS_REQUEST, getOrders, api),
+    takeLatest(AddContactTypes.CREATE_CONTACT_SUCCESS, appendContactToContacts)
   ]
 }

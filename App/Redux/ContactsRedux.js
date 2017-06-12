@@ -29,7 +29,8 @@ const { Types, Creators }: { Types: Array<string>, Creators: () => mixed } = cre
   fetchContactsRequest: null,
   fetchContactsSuccess: ['contacts'],
   fetchContactsFailure: ['error'],
-  toggleErrorShown: null
+  toggleErrorShown: null,
+  addContact: ['contact']
 })
 
 export const ContactsTypes = Types
@@ -49,6 +50,9 @@ export const INITIAL_STATE: StateType = Immutable({
 
 /* ------------- Reducers ------------- */
 
+export const mergeContact = (state: StateType, { contact }: { contact: ContactType }) =>
+  state.merge({ contacts: [ ...state.contacts, contact ] })
+
 export const request = (state: StateType) =>
   state.merge({ fetching: true })
 
@@ -67,5 +71,6 @@ export const reducer: (state: StateType, action: {}) => mixed = createReducer(IN
   [Types.FETCH_CONTACTS_REQUEST]: request,
   [Types.FETCH_CONTACTS_SUCCESS]: success('contacts'),
   [Types.FETCH_CONTACTS_FAILURE]: failure('contacts'),
-  [Types.TOGGLE_ERROR_SHOWN]: toggleErrorShown
+  [Types.TOGGLE_ERROR_SHOWN]: toggleErrorShown,
+  [Types.ADD_CONTACT]: mergeContact
 })

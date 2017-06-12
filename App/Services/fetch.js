@@ -2,8 +2,7 @@ const API = 'http://private-36f1e-contactstest.apiary-mock.com'
 
 const headers = {
   'Accept': 'application/json',
-  'Content-Type': 'application/json',
-  'Cache-Control': 'no-cache'
+  'Content-Type': 'application/json'
 }
 
 export function get (route) {

@@ -37,13 +37,14 @@ const AddContactScreenScreen = ({ navBarConfig, firstAndLastName, phone,
         onFirstNameAndLastNameChange={setFirstNameAndLastName}
         onPhoneChange={setPhone}
         firstAndLastName={firstAndLastName}
-        phone={phone} />
+        phone={phone}
+        callback={() => navBarConfig.onBackPress()} />
     </Container>
 
 const mapDispatchToProps = (dispatch: () => mixed): { actions: {} } => ({
   actions: {
-    createContact: (firstAndLastName, phone) =>
-      dispatch(AddContactActions.createContactRequest(firstAndLastName, phone)),
+    createContact: (firstAndLastName, phone, callback) =>
+      dispatch(AddContactActions.createContactRequest(firstAndLastName, phone, callback)),
     setFirstNameAndLastName: (firstAndLastName) =>
       dispatch(AddContactActions.setFirstAndLastName(firstAndLastName)),
     setPhone: (phone) =>

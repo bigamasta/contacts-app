@@ -23,8 +23,8 @@ const { Types, Creators }: { Types: Array<string>, Creators: () => mixed } =
   createActions({
     setFirstAndLastName: ['firstAndLastName'],
     setPhone: ['phone'],
-    createContactRequest: ['firstAndLastName', 'phone'],
-    createContactSuccess: null,
+    createContactRequest: ['firstAndLastName', 'phone', 'callback'],
+    createContactSuccess: ['contact'],
     createContactFailure: ['error'],
     toggleErrorShown: null
   })

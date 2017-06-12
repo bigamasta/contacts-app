@@ -10,7 +10,8 @@ type PropsType = {
   onFirstNameAndLastNameChange: () => mixed,
   onPhoneChange: () => mixed,
   firstAndLastName: string,
-  phone: string
+  phone: string,
+  callback: () => mixed
 }
 
 const validateFirstAndLastName = (firstAndLastName: string): void => {
@@ -27,7 +28,7 @@ const validateForm = (firstAndLastName: string, phone: string): void => {
 }
 
 const AddContactForm = ({ onSubmit, onFirstNameAndLastNameChange, onPhoneChange,
-  firstAndLastName, phone }: PropsType): React$Element<*> =>
+  firstAndLastName, phone, callback }: PropsType): React$Element<*> =>
     <Container>
       <Content>
         <Form>
@@ -37,7 +38,7 @@ const AddContactForm = ({ onSubmit, onFirstNameAndLastNameChange, onPhoneChange,
           <Item last>
             <Input placeholder={I18n.t('phone')} onChangeText={onPhoneChange} keyboardType='phone-pad' />
           </Item>
-          <Button block onPress={() => onSubmit(firstAndLastName, phone)}>
+          <Button block onPress={() => onSubmit(firstAndLastName, phone, callback)}>
             <Text>{I18n.t('add')}</Text>
           </Button>
         </Form>
@@ -46,10 +47,10 @@ const AddContactForm = ({ onSubmit, onFirstNameAndLastNameChange, onPhoneChange,
 
 const withValidate = mapProps((props) => ({
   ...props,
-  onSubmit: (firstAndLastName, phone) => {
+  onSubmit: (firstAndLastName, phone, callback) => {
     try {
       validateForm(firstAndLastName, phone)
-      props.onSubmit(firstAndLastName, phone)
+      props.onSubmit(firstAndLastName, phone, callback)
     } catch (msg) {
       ErrorAlert({ title: I18n.t('formIsNotValid'), description: msg })
     }
