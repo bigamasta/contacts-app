@@ -1,4 +1,4 @@
-// @Flow
+// @flow
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 
@@ -36,13 +36,13 @@ export const INITIAL_STATE: StateType = Immutable({
 
 /* ------------- Reducers ------------- */
 
-export const request = (state: StateType) =>
+export const request = (state: StateType): StateType =>
   state.merge({ fetching: true })
 
-export const success = (path: string): () => mixed => (state: StateType, action) =>
+export const success = (path: string): () => mixed => (state: StateType, action: {}): StateType =>
   state.merge({ fetching: false, error: null, [path]: action[path] })
 
-export const failure = (path: string): () => mixed => (state: StateType) =>
+export const failure = (path: string): () => StateType => (state: StateType): StateType =>
   state.merge({ fetching: false, error: true, [path]: null })
 
 /* ------------- Hookup Reducers To Types ------------- */

@@ -1,17 +1,18 @@
-// @Flow
+// @flow
 import React from 'react'
 import { ListItem, Thumbnail, Text, Body, Left } from 'native-base'
 import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import { setPropTypes, defaultProps } from 'recompose'
 
-import { ContactType } from '../Redux/OrdersRedux'
+import type ContactType from '../Redux/ContactsRedux'
 import styles from './Styles/ContactListItemStyle'
 import { Images } from '../Themes'
 
 type PropsType = {
   contact: ContactType,
-  onContactPress: () => mixed
+  onContactPress: () => mixed,
+  avatarPhantom: () => mixed
 }
 
 const ContactListItem = ({ avatarPhantom, contact, contact: { name, phone, pictureUrl }, onContactPress }: PropsType): () => mixed =>

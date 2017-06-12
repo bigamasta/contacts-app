@@ -1,4 +1,4 @@
-// @Flow
+// @flow
 import React from 'react'
 import { ListItem, Text, Body } from 'native-base'
 import PropTypes from 'prop-types'

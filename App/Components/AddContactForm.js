@@ -1,4 +1,4 @@
-// @Flow
+// @flow
 import React from 'react'
 import I18n from 'react-native-i18n'
 import { Container, Content, Form, Item, Input, Button, Text } from 'native-base'

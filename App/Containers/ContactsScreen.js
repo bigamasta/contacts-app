@@ -1,20 +1,17 @@
-// @Flow
+// @flow
 import React from 'react'
 import { Platform } from 'react-native'
-// import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Container } from 'native-base'
 import { lifecycle, withProps, compose } from 'recompose'
-// import I18n from 'react-native-i18n'
 
-// import { Images } from '../Themes'
-
-import NavigationBar, { NavBarConfigType } from '../Components/NavigationBar'
-// import ContactListItem from '../Components/ContactListItem'
+import NavigationBar from '../Components/NavigationBar'
+import type NavBarConfigType from '../Components/NavigationBar'
 import ContactsList from '../Components/ContactsList'
 import AddContactFAB from '../Components/AddContactFAB'
 
-import OrdersActions, { ContactType } from '../Redux/ContactsRedux'
+import OrdersActions from '../Redux/ContactsRedux'
+import type ContactType from '../Redux/ContactsRedux'
 
 type PropsType = {
   navBarConfig: NavBarConfigType,
@@ -54,11 +51,11 @@ const withNavBarConfig = withProps({
     withBack: false,
     withAdd: Platform.OS === 'ios'
   }
-}: { navBarConfig: NavBarConfigType })
+})
 
 const withFAB = withProps({
   showFAB: Platform.OS === 'android'
-}: { showFAB: boolean })
+})
 
 const withLifecycle = lifecycle({
   componentWillMount () {

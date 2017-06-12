@@ -1,4 +1,4 @@
-// @Flow
+// @flow
 import React from 'react'
 import { Container } from 'native-base'
 import { connect } from 'react-redux'
@@ -6,7 +6,8 @@ import I18n from 'react-native-i18n'
 import { compose, mapProps } from 'recompose'
 import AddContactActions from '../Redux/AddContactRedux'
 
-import NavigationBar, { NavBarConfigType } from '../Components/NavigationBar'
+import NavigationBar from '../Components/NavigationBar'
+import type NavBarConfigType from '../Components/NavigationBar'
 import AddContactForm from '../Components/AddContactForm'
 
 type ActionsType = {
@@ -28,9 +29,9 @@ const AddContactScreenScreen = ({ navBarConfig, firstAndLastName, phone,
     <Container>
       <NavigationBar {...navBarConfig} />
       <AddContactForm
-        onSubmit={createContact}
-        onFirstNameAndLastNameChange={setFirstNameAndLastName}
-        onPhoneChange={setPhone}
+        onSubmit={() => createContact}
+        onFirstNameAndLastNameChange={() => setFirstNameAndLastName}
+        onPhoneChange={() => setPhone}
         firstAndLastName={firstAndLastName}
         phone={phone} />
     </Container>

@@ -1,14 +1,16 @@
-// @Flow
+// @flow
 import React from 'react'
 import { connect } from 'react-redux'
 import { Container } from 'native-base'
 import { lifecycle, compose, mapProps } from 'recompose'
 
-import NavigationBar, { NavBarConfigType } from '../Components/NavigationBar'
+import NavigationBar from '../Components/NavigationBar'
+import type NavBarConfigType from '../Components/NavigationBar'
 import ContactDetails from '../Components/ContactDetails'
 import Orders from '../Components/Orders'
 
-import OrdersActions, { OrderType } from '../Redux/OrdersRedux'
+import OrdersActions from '../Redux/OrdersRedux'
+import type OrderType from '../Redux/OrdersRedux'
 
 type PropsType = {
   navBarConfig: NavBarConfigType,

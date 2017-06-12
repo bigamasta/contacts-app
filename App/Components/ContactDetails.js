@@ -1,4 +1,4 @@
-// @Flow
+// @flow
 import React from 'react'
 import { Text } from 'native-base'
 import { View } from 'react-native'

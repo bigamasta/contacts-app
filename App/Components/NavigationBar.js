@@ -1,4 +1,4 @@
-// @Flow
+// @flow
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Header, Left, Button, Icon, Body, Title, Right } from 'native-base'
@@ -17,7 +17,7 @@ export type NavBarConfigType = {
 const NavigationBar = ({ title, withAdd, withBack, withMenu, onBackPress }: NavBarConfigType): () => mixed =>
   <Header>
     <Left style={styles.iconGroup}>
-      {withBack && <Button transparent onPress={() => onBackPress()}>
+      {withBack && <Button transparent onPress={() => onBackPress && onBackPress()}>
         <Icon name='arrow-back' />
       </Button>}
       <Button transparent>

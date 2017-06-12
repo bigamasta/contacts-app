@@ -1,10 +1,10 @@
-// @Flow
+// @flow
 import React from 'react'
 import { Content, Container } from 'native-base'
 import PropTypes from 'prop-types'
 import { setPropTypes } from 'recompose'
 import ContactListItem from './ContactListItem'
-import { ContactType } from '../Redux/OrdersRedux'
+import type ContactType from '../Redux/OrdersRedux'
 
 type PropsType = {
   contacts: Array<ContactType>,
