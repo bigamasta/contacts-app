@@ -8,5 +8,6 @@
   "firstAndLastNameNeedsToBeAtLeast5CharactersLong": "Meno a priezvisko musí mať aspoň 5 znakov",
   "unknownError": "Neznáma chyba",
   "error": "Chyba",
-  "formIsNotValid": "Formulár je nesprávne vyplnený"
+  "formIsNotValid": "Formulár je nesprávne vyplnený",
+  "internetConnectionNotAvailable": "Internetové pripojenie nie je k dispozícii"
 }

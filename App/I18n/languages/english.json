@@ -8,5 +8,6 @@
   "firstAndLastNameNeedsToBeAtLeast5CharactersLong": "First and Last Name needs to be at least 5 characters long",
   "unknownError": "Unknown Error",
   "error": "Error",
-  "formIsNotValid": "Form is not valid"
+  "formIsNotValid": "Form is not valid",
+  "internetConnectionNotAvailable": "Internet connection not available"
 }
