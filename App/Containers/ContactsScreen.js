@@ -18,19 +18,19 @@ import OrdersActions, { ContactType } from '../Redux/ContactsRedux'
 // Styles
 // import styles from './Styles/LaunchScreenStyles'
 
-const ContactsScreen = ({ navBarConfig, contacts, navigation: { navigate } }: { contacts: ?Array<ContactType> }): () => mixed =>
+const ContactsScreen = ({ navBarConfig, contacts, showFAB, navigation: { navigate } }: { contacts: ?Array<ContactType> }): () => mixed =>
   <Container>
     <NavigationBar {...navBarConfig} />
     <ContactsList contacts={contacts} onContactPress={(contact: ContactType): void =>
       navigate('Order', { contact })
     } />
-    <Fab
+    {showFAB && <Fab
       active
       style={{ backgroundColor: '#5067FF' }}
       position='bottomRight'
       onPress={() => navigate('AddContact')}>
       <Icon name='add' />
-    </Fab>
+    </Fab>}
   </Container>
 
 const mapStateToProps = (state) => {
@@ -54,6 +54,10 @@ const withNavBarConfig = withProps({
   }
 })
 
+const withFAB = withProps({
+  showFAB: Platform.OS === 'android'
+})
+
 const withLifecycle = lifecycle({
   componentWillMount () {
     const { actions: { fetchContacts } } = this.props
@@ -64,6 +68,7 @@ const withLifecycle = lifecycle({
 const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withNavBarConfig,
+  withFAB,
   withLifecycle
 )
 
