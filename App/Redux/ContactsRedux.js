@@ -3,6 +3,7 @@ import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 
 /* ------------- State Type ------------- */
+
 export type ContactType = {
   id: ?string,
   name: ?string,
@@ -18,7 +19,7 @@ type StateType = {
 
 /* ------------- Types and Action Creators ------------- */
 
-const { Types, Creators } = createActions({
+const { Types, Creators }: { Types: Array<string>, Creators: () => mixed } = createActions({
   fetchContactsRequest: null,
   fetchContactsSuccess: ['contacts'],
   fetchContactsFailure: null
@@ -30,9 +31,9 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE: StateType = Immutable({
-  fetching: null,
-  error: null,
-  contacts: null
+  fetching: false,
+  error: false,
+  contacts: []
 })
 
 /* ------------- Reducers ------------- */
@@ -40,15 +41,15 @@ export const INITIAL_STATE: StateType = Immutable({
 export const request = (state: StateType) =>
   state.merge({ fetching: true })
 
-export const success = (path) => (state: StateType, action) =>
+export const success = (path: string) => (state: StateType, action) =>
   state.merge({ fetching: false, error: null, [path]: action[path] })
 
-export const failure = (path) => (state: StateType) =>
+export const failure = (path: string) => (state: StateType) =>
   state.merge({ fetching: false, error: true, [path]: null })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
-export const reducer = createReducer(INITIAL_STATE, {
+export const reducer: (state: StateType, action: {}) => mixed = createReducer(INITIAL_STATE, {
   [Types.FETCH_CONTACTS_REQUEST]: request,
   [Types.FETCH_CONTACTS_SUCCESS]: success('contacts'),
   [Types.FETCH_CONTACTS_FAILURE]: failure('contacts')

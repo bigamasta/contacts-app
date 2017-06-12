@@ -17,7 +17,7 @@ type StateType = {
 
 /* ------------- Types and Action Creators ------------- */
 
-const { Types, Creators } = createActions({
+const { Types, Creators }: { Types: Array<string>, Creators: () => mixed } = createActions({
   fetchOrdersRequest: null,
   fetchOrdersSuccess: ['orders'],
   fetchOrdersFailure: null
@@ -29,9 +29,9 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE: StateType = Immutable({
-  fetching: null,
-  error: null,
-  orders: null
+  fetching: false,
+  error: false,
+  orders: []
 })
 
 /* ------------- Reducers ------------- */
@@ -39,15 +39,15 @@ export const INITIAL_STATE: StateType = Immutable({
 export const request = (state: StateType) =>
   state.merge({ fetching: true })
 
-export const success = (path) => (state: StateType, action) =>
+export const success = (path: string): () => mixed => (state: StateType, action) =>
   state.merge({ fetching: false, error: null, [path]: action[path] })
 
-export const failure = (path) => (state: StateType) =>
+export const failure = (path: string): () => mixed => (state: StateType) =>
   state.merge({ fetching: false, error: true, [path]: null })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
-export const reducer = createReducer(INITIAL_STATE, {
+export const reducer: (state: StateType, action: {}) => mixed = createReducer(INITIAL_STATE, {
   [Types.FETCH_ORDERS_REQUEST]: request,
   [Types.FETCH_ORDERS_SUCCESS]: success('orders'),
   [Types.FETCH_ORDERS_FAILURE]: failure('orders')

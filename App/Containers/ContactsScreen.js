@@ -16,11 +16,17 @@ import AddContactFAB from '../Components/AddContactFAB'
 
 import OrdersActions, { ContactType } from '../Redux/ContactsRedux'
 
-// Styles
-// import styles from './Styles/LaunchScreenStyles'
+type PropsType = {
+  navBarConfig: NavBarConfigType,
+  contacts: ?Array<ContactType>,
+  showFAB: boolean,
+  navigation: {
+    navigate: () => {}
+  }
+}
 
 const ContactsScreen = ({ navBarConfig, contacts, showFAB, navigation: { navigate } }:
-  { contacts: ?Array<ContactType>, navBarConfig: NavBarConfigType }): () => mixed =>
+  PropsType): () => mixed =>
     <Container>
       <NavigationBar {...navBarConfig} />
       <ContactsList contacts={contacts} onContactPress={(contact: ContactType): void =>
@@ -35,7 +41,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: () => mixed): { actions: {} } => ({
   actions: {
     fetchContacts: () => dispatch(OrdersActions.fetchContactsRequest())
   }
@@ -44,15 +50,15 @@ const mapDispatchToProps = dispatch => ({
 const withNavBarConfig = withProps({
   navBarConfig: {
     title: 'Orders',
-    menu: true,
-    back: false,
+    withMenu: true,
+    withBack: false,
     withAdd: Platform.OS === 'ios'
   }
-})
+}: { navBarConfig: NavBarConfigType })
 
 const withFAB = withProps({
   showFAB: Platform.OS === 'android'
-})
+}: { showFAB: boolean })
 
 const withLifecycle = lifecycle({
   componentWillMount () {

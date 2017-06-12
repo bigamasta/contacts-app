@@ -5,10 +5,10 @@ import { setPropTypes } from 'recompose'
 
 import styles from './Styles/NavigationBarStyles'
 
-const NavigationBar = ({ title, withAdd, back, menu = true, onBackPress }) =>
+const NavigationBar = ({ title, withAdd, withBack, withMenu, onBackPress }) =>
   <Header>
     <Left style={styles.iconGroup}>
-      {back && <Button transparent onPress={() => onBackPress()}>
+      {withBack && <Button transparent onPress={() => onBackPress()}>
         <Icon name='arrow-back' />
       </Button>}
       <Button transparent>
@@ -22,7 +22,7 @@ const NavigationBar = ({ title, withAdd, back, menu = true, onBackPress }) =>
       {withAdd && <Button transparent>
         <Icon name='add' />
       </Button>}
-      {menu && <Button transparent>
+      {withMenu && <Button transparent>
         <Icon name='more' />
       </Button>}
     </Right>
@@ -30,8 +30,8 @@ const NavigationBar = ({ title, withAdd, back, menu = true, onBackPress }) =>
 
 export type NavBarConfigType = {
   title?: string,
-  menu?: boolean,
-  back?: boolean,
+  withMenu?: boolean,
+  withBack?: boolean,
   withAdd?: boolean,
   onBackPress?: () => void
 }

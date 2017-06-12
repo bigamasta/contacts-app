@@ -13,13 +13,14 @@ type StateType = {
 
 /* ------------- Types and Action Creators ------------- */
 
-const { Types, Creators } = createActions({
-  setFirstAndLastName: ['firstAndLastName'],
-  setPhone: ['phone'],
-  createContactRequest: ['firstAndLastName', 'phone'],
-  createContactSuccess: null,
-  createContactFailure: null
-})
+const { Types, Creators }: { Types: Array<string>, Creators: () => mixed } =
+  createActions({
+    setFirstAndLastName: ['firstAndLastName'],
+    setPhone: ['phone'],
+    createContactRequest: ['firstAndLastName', 'phone'],
+    createContactSuccess: null,
+    createContactFailure: null
+  })
 
 export const AddContactTypes = Types
 export default Creators
@@ -27,19 +28,13 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE: StateType = Immutable({
-  fetching: null,
-  error: null,
-  firstAndLastName: null,
-  phone: null
+  fetching: false,
+  error: false,
+  firstAndLastName: '',
+  phone: ''
 })
 
 /* ------------- Reducers ------------- */
-
-// export const firstAndLastName = (state: StateType, { firstAndLastName }: { firstAndLastName: string }): StateType =>
-//   state.merge({ firstAndLastName })
-//
-// export const phone = (state: StateType, { phone }: { phone: string }): StateType =>
-//   state.merge({ phone })
 
 const merge = (path: string) => (state: StateType, action): StateType =>
   state.merge({ [path]: action[path] })
@@ -55,7 +50,7 @@ export const failure = (state: StateType): StateType =>
 
 /* ------------- Hookup Reducers To Types ------------- */
 
-export const reducer = createReducer(INITIAL_STATE, {
+export const reducer: (state: StateType, action: {}) => mixed = createReducer(INITIAL_STATE, {
   [Types.SET_FIRST_AND_LAST_NAME]: merge('firstAndLastName'),
   [Types.SET_PHONE]: merge('phone'),
   [Types.CREATE_CONTACT_REQUEST]: request,

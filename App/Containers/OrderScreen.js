@@ -4,16 +4,19 @@ import { connect } from 'react-redux'
 import { Container } from 'native-base'
 import { lifecycle, compose, mapProps } from 'recompose'
 
-import NavigationBar from '../Components/NavigationBar'
+import NavigationBar, { NavBarConfigType } from '../Components/NavigationBar'
 import ContactDetails from '../Components/ContactDetails'
 import Orders from '../Components/Orders'
 
-import OrdersActions from '../Redux/OrdersRedux'
+import OrdersActions, { OrderType } from '../Redux/OrdersRedux'
 
-// Styles
-// import styles from './Styles/LaunchScreenStyles'
+type PropsType = {
+  navBarConfig: NavBarConfigType,
+  contactDetails: {},
+  orders: Array<OrderType>
+}
 
-const OrderScreen = ({ navBarConfig, contactDetails, orders }) =>
+const OrderScreen = ({ navBarConfig, contactDetails, orders } : PropsType): () => mixed =>
   <Container>
     <NavigationBar {...navBarConfig} />
     <ContactDetails details={contactDetails} />
@@ -26,25 +29,25 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: () => mixed): { actions: {} } => ({
   actions: {
     fetchOrders: () => dispatch(OrdersActions.fetchOrdersRequest())
   }
 })
 
-const withNavBarConfig = mapProps(
+const withNavBarConfig: () => mixed = mapProps(
   (props) => ({
     navBarConfig: {
-      back: true,
-      menu: true,
+      withBack: true,
+      withMenu: true,
       onBackPress: props.navigation.goBack,
       title: props.navigation.state.params.contact.name
     },
     ...props
-  })
+  }: { navBarConfig: NavBarConfigType })
 )
 
-const withContactDetails = mapProps(
+const withContactDetails: () => mixed = mapProps(
   (props) => ({
     contactDetails: {
       'Phone': props.navigation.state.params.contact.phone
@@ -53,7 +56,7 @@ const withContactDetails = mapProps(
   })
 )
 
-const withLifecycle = lifecycle({
+const withLifecycle: () => mixed = lifecycle({
   componentWillMount () {
     const { actions: { fetchOrders },
             navigation: { state: { params: { contact: { id } } } } } = this.props
@@ -61,7 +64,7 @@ const withLifecycle = lifecycle({
   }
 })
 
-const enhance = compose(
+const enhance: () => mixed = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withNavBarConfig,
   withContactDetails,
