@@ -11,10 +11,11 @@ export type NavBarConfigType = {
   withMenu?: boolean,
   withBack?: boolean,
   withAdd?: boolean,
-  onBackPress?: () => void
+  onBackPress?: () => void,
+  onPlusPress?: () => void,
 }
 
-const NavigationBar = ({ title, withAdd, withBack, withMenu, onBackPress }: NavBarConfigType): () => mixed =>
+const NavigationBar = ({ title, withAdd, withBack, withMenu, onBackPress, onPlusPress }: NavBarConfigType): () => mixed =>
   <Header>
     <Left style={styles.iconGroup}>
       {withBack && <Button transparent onPress={() => onBackPress && onBackPress()}>
@@ -28,7 +29,7 @@ const NavigationBar = ({ title, withAdd, withBack, withMenu, onBackPress }: NavB
       <Title>{title}</Title>
     </Body>
     <Right>
-      {withAdd && <Button transparent>
+      {withAdd && <Button transparent onPress={() => onPlusPress && onPlusPress()}>
         <Icon name='add' />
       </Button>}
       {withMenu && <Button transparent>

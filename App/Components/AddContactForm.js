@@ -4,15 +4,15 @@ import I18n from 'react-native-i18n'
 import { Container, Content, Form, Item, Input, Button, Text } from 'native-base'
 
 type PropsType = {
-  onSubmit: () => void,
-  onFirstNameAndLastNameChange: () => void,
-  onPhoneChange: () => void,
+  onSubmit: () => mixed,
+  onFirstNameAndLastNameChange: () => mixed,
+  onPhoneChange: () => mixed,
   firstAndLastName: string,
   phone: string
 }
 
 const AddContactForm = ({ onSubmit, onFirstNameAndLastNameChange, onPhoneChange,
-  firstAndLastName, phone }: PropsType): () => mixed =>
+  firstAndLastName, phone }: PropsType): React$Element<*> =>
     <Container>
       <Content>
         <Form>

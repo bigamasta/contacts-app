@@ -4,7 +4,7 @@ import { Fab, Icon } from 'native-base'
 
 import styles from './Styles/AddContactFABStyles'
 
-const AddContactFAB = ({ onPress }: { onPress: () => void }): () => mixed =>
+const AddContactFAB = ({ onPress }: { onPress: () => void }): React$Element<*> =>
   <Fab
     active
     style={styles.fab}

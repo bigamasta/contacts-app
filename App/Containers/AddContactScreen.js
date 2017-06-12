@@ -29,9 +29,9 @@ const AddContactScreenScreen = ({ navBarConfig, firstAndLastName, phone,
     <Container>
       <NavigationBar {...navBarConfig} />
       <AddContactForm
-        onSubmit={() => createContact}
-        onFirstNameAndLastNameChange={() => setFirstNameAndLastName}
-        onPhoneChange={() => setPhone}
+        onSubmit={createContact}
+        onFirstNameAndLastNameChange={setFirstNameAndLastName}
+        onPhoneChange={setPhone}
         firstAndLastName={firstAndLastName}
         phone={phone} />
     </Container>
