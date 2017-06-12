@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga/effects'
-import API from '../Services/Api'
+import * as API from '../Services/Api'
 import FixtureAPI from '../Services/FixtureApi'
 import DebugConfig from '../Config/DebugConfig'
 
@@ -19,7 +19,7 @@ import { getOrders } from './OrdersSagas'
 
 // The API we use is only used from Sagas, so we create it here and pass along
 // to the sagas which need it.
-const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
+const api = DebugConfig.useFixtures ? FixtureAPI : API
 
 /* ------------- Connect Types To Sagas ------------- */
 

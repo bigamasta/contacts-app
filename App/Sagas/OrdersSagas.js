@@ -3,16 +3,14 @@ import { path } from 'ramda'
 import OrdersActions from '../Redux/OrdersRedux'
 
 export function * getOrders (api, { id }) {
-  // make the call to the api
   const response = yield call(api.getOrders, id)
+  const data = yield response.json()
 
   if (response.ok) {
-    const orders = path(['data', 'items'], response)
-
-    // do data conversion here if needed
+    const orders = path(['items'], data)
     yield put(OrdersActions.fetchOrdersSuccess(orders))
   } else {
-    const error = path(['data', 'error'], response)
+    const error = path(['error'], data)
     yield put(OrdersActions.fetchOrdersFailure(error))
   }
 }
