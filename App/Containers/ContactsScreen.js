@@ -56,7 +56,8 @@ const withNavBarConfig = mapProps((props) => ({
     withBack: false,
     withAdd: Platform.OS === 'ios',
     onPlusPress: props.onAddContactPress
-  }
+  },
+  ...props
 }))
 
 const withFAB = withProps({
@@ -72,10 +73,10 @@ const withLifecycle = lifecycle({
 
 const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
+  withHandlers,
   withNavBarConfig,
   withFAB,
-  withLifecycle,
-  withHandlers
+  withLifecycle
 )
 
 export default enhance(ContactsScreen)
