@@ -2,6 +2,7 @@
 import React from 'react'
 import { Platform } from 'react-native'
 import { connect } from 'react-redux'
+import I18n from 'react-native-i18n'
 import { Container } from 'native-base'
 import { lifecycle, withProps, compose, mapProps } from 'recompose'
 import { createStructuredSelector } from 'reselect'
@@ -50,7 +51,7 @@ const withHandlers = mapProps((props) => ({
 
 const withNavBarConfig = mapProps((props) => ({
   navBarConfig: {
-    title: 'Orders',
+    title: I18n.t('orders'),
     withMenu: true,
     withBack: false,
     withAdd: Platform.OS === 'ios',

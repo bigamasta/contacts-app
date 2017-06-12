@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import { connect } from 'react-redux'
+import I18n from 'react-native-i18n'
 import { Container } from 'native-base'
 import { lifecycle, compose, mapProps } from 'recompose'
 import { createStructuredSelector } from 'reselect'
@@ -51,7 +52,7 @@ const withNavBarConfig: () => mixed = mapProps(
 const withContactDetails: () => mixed = mapProps(
   (props) => ({
     contactDetails: {
-      'Phone': props.navigation.state.params.contact.phone
+      [I18n.t('phone')]: props.navigation.state.params.contact.phone
     },
     ...props
   })
