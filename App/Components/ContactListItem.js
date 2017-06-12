@@ -30,7 +30,7 @@ const ContactListItem = ({ avatarPhantom, contact, contact: { name, phone, pictu
   </View>
 
 const enhance: () => mixed = defaultProps({
-  avatarPhantom: Images.ignite
+  avatarPhantom: Images.avatarPhantom
 })
 
 export default enhance(setPropTypes({
