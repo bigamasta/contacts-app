@@ -1,15 +1,17 @@
 // @flow
 import { Alert } from 'react-native'
+import { defaultProps } from 'recompose'
+import I18n from 'react-native-i18n'
 
 export type ErrorType = {
-  code: number,
-  message: string
+  title: string,
+  description: string
 }
 
-const ErrorAlert = ({ code, message }: ErrorType, callback: () => mixed): () => void => {
+const ErrorAlert = ({ title, description }: ErrorType, callback?: () => mixed): any => {
   Alert.alert(
-    `Error ${code}`,
-    message,
+    `${title}`,
+    description,
     [
       { text: 'OK', onPress: () => callback && callback() }
     ],
@@ -17,4 +19,7 @@ const ErrorAlert = ({ code, message }: ErrorType, callback: () => mixed): () => 
   )
 }
 
-export default ErrorAlert
+export default defaultProps({
+  title: I18n.t('error'),
+  description: I18n.t('unknownError')
+})(ErrorAlert)

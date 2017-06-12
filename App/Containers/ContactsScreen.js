@@ -74,7 +74,7 @@ const withLifecycle = lifecycle({
     fetchContacts()
   },
   componentWillReceiveProps ({ error, errorShown, actions: { toggleErrorShown } }) {
-    error && errorShown && ErrorAlert(error, () => toggleErrorShown())
+    error && errorShown && ErrorAlert({ title: `Error ${error.code}`, description: error.message }, () => toggleErrorShown())
   }
 })
 

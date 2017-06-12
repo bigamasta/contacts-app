@@ -1,7 +1,12 @@
 {
-   "orders": "Orders",
-   "addNewContact": "Add New Contact",
-   "firstAndLastName": "First and Last Name",
-   "phone": "Phone",
-   "add": "Add"
+  "orders": "Orders",
+  "addNewContact": "Add New Contact",
+  "firstAndLastName": "First and Last Name",
+  "phone": "Phone",
+  "add": "Add",
+  "phoneNeedsToBeAtLeast5CharactersLong": "Phone needs to be at least 5 characters long",
+  "firstAndLastNameNeedsToBeAtLeast5CharactersLong": "First and Last Name needs to be at least 5 characters long",
+  "unknownError": "Unknown Error",
+  "error": "Error",
+  "formIsNotValid": "Form is not valid"
 }

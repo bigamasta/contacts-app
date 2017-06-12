@@ -69,7 +69,7 @@ const withLifecycle: () => mixed = lifecycle({
     fetchOrders(id)
   },
   componentWillReceiveProps ({ error, errorShown, actions: { toggleErrorShown } }) {
-    error && errorShown && ErrorAlert(error, () => toggleErrorShown())
+    error && errorShown && ErrorAlert({ title: `Error ${error.code}`, description: error.message }, () => toggleErrorShown())
   }
 })
 

@@ -3,5 +3,10 @@
   "addNewContact": "Pridaj Nový Kontakt",
   "firstAndLastName": "Meno a Priezvisko",
   "phone": "Telefón",
-  "add": "Pridať"
+  "add": "Pridať",
+  "phoneNeedsToBeAtLeast5CharactersLong": "Telefónne číslo musí mať aspoň 5 znakov",
+  "firstAndLastNameNeedsToBeAtLeast5CharactersLong": "Meno a priezvisko musí mať aspoň 5 znakov",
+  "unknownError": "Neznáma chyba",
+  "error": "Chyba",
+  "formIsNotValid": "Formulár je nesprávne vyplnený"
 }
