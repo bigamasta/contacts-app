@@ -3,6 +3,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Container } from 'native-base'
 import { lifecycle, compose, mapProps } from 'recompose'
+import { createStructuredSelector } from 'reselect'
+
+import selectors from './Selectors/OrdersScreenSelectors'
 
 import NavigationBar from '../Components/NavigationBar'
 import type NavBarConfigType from '../Components/NavigationBar'
@@ -25,14 +28,6 @@ const OrderScreen = ({ navBarConfig, contactDetails, orders } : PropsType): () =
     <ContactDetails details={contactDetails} />
     <Orders orders={orders} />
   </Container>
-
-const mapStateToProps = (state) => {
-  return {
-    orders: state.orders.orders,
-    error: state.orders.error,
-    errorShown: state.orders.errorShown
-  }
-}
 
 const mapDispatchToProps = (dispatch: () => mixed): { actions: {} } => ({
   actions: {
@@ -74,7 +69,7 @@ const withLifecycle: () => mixed = lifecycle({
 })
 
 const enhance: () => mixed = compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(createStructuredSelector({ ...selectors }), mapDispatchToProps),
   withNavBarConfig,
   withContactDetails,
   withLifecycle

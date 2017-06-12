@@ -4,6 +4,9 @@ import { Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { Container } from 'native-base'
 import { lifecycle, withProps, compose, mapProps } from 'recompose'
+import { createStructuredSelector } from 'reselect'
+
+import selectors from './Selectors/ContactsScreenSelectors'
 
 import NavigationBar from '../Components/NavigationBar'
 import type NavBarConfigType from '../Components/NavigationBar'
@@ -29,14 +32,6 @@ const ContactsScreen = ({ navBarConfig, contacts, showFAB, onContactPress, onAdd
       <ContactsList contacts={contacts} onContactPress={onContactPress} />
       {showFAB && <AddContactFAB onPress={onAddContactPress} />}
     </Container>
-
-const mapStateToProps = (state) => {
-  return {
-    contacts: state.contacts.contacts,
-    error: state.contacts.error,
-    errorShown: state.contacts.errorShown
-  }
-}
 
 const mapDispatchToProps = (dispatch: () => mixed): { actions: {} } => ({
   actions: {
@@ -79,7 +74,7 @@ const withLifecycle = lifecycle({
 })
 
 const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(createStructuredSelector({ ...selectors }), mapDispatchToProps),
   withHandlers,
   withNavBarConfig,
   withFAB,
