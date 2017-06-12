@@ -28,6 +28,14 @@ const NavigationBar = ({ title, withAdd, back, menu = true, onBackPress }) =>
     </Right>
   </Header>
 
+export type NavBarConfigType = {
+  title?: string,
+  menu?: boolean,
+  back?: boolean,
+  withAdd?: boolean,
+  onBackPress?: () => void
+}
+
 export default setPropTypes({
   title: PropTypes.string.isRequired,
   withAdd: PropTypes.bool,

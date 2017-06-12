@@ -9,7 +9,7 @@ import { lifecycle, withProps, compose } from 'recompose'
 
 // import { Images } from '../Themes'
 
-import NavigationBar from '../Components/NavigationBar'
+import NavigationBar, { NavBarConfigType } from '../Components/NavigationBar'
 // import ContactListItem from '../Components/ContactListItem'
 import ContactsList from '../Components/ContactsList'
 import AddContactFAB from '../Components/AddContactFAB'
@@ -19,14 +19,15 @@ import OrdersActions, { ContactType } from '../Redux/ContactsRedux'
 // Styles
 // import styles from './Styles/LaunchScreenStyles'
 
-const ContactsScreen = ({ navBarConfig, contacts, showFAB, navigation: { navigate } }: { contacts: ?Array<ContactType> }): () => mixed =>
-  <Container>
-    <NavigationBar {...navBarConfig} />
-    <ContactsList contacts={contacts} onContactPress={(contact: ContactType): void =>
-      navigate('Order', { contact })
-    } />
-    {showFAB && <AddContactFAB onPress={() => navigate('AddContact')} />}
-  </Container>
+const ContactsScreen = ({ navBarConfig, contacts, showFAB, navigation: { navigate } }:
+  { contacts: ?Array<ContactType>, navBarConfig: NavBarConfigType }): () => mixed =>
+    <Container>
+      <NavigationBar {...navBarConfig} />
+      <ContactsList contacts={contacts} onContactPress={(contact: ContactType): void =>
+        navigate('Order', { contact })
+      } />
+      {showFAB && <AddContactFAB onPress={() => navigate('AddContact')} />}
+    </Container>
 
 const mapStateToProps = (state) => {
   return {
