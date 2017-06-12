@@ -12,6 +12,7 @@ export function * getContacts (api) {
     // do data conversion here if needed
     yield put(ContactsActions.fetchContactsSuccess(contacts))
   } else {
-    yield put(ContactsActions.fetchContactsFailure())
+    const error = path(['data', 'error'], response)
+    yield put(ContactsActions.fetchContactsFailure(error))
   }
 }

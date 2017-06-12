@@ -9,9 +9,15 @@ export type OrderType = {
   count: ?string
 }
 
+export type ErrorType = {
+  message: string,
+  code: number
+}
+
 type StateType = {
   fetching: boolean,
-  error: boolean,
+  error: ?ErrorType,
+  errorShown: boolean,
   orders: Array<OrderType>
 }
 
@@ -20,7 +26,8 @@ type StateType = {
 const { Types, Creators }: { Types: Array<string>, Creators: () => mixed } = createActions({
   fetchOrdersRequest: null,
   fetchOrdersSuccess: ['orders'],
-  fetchOrdersFailure: null
+  fetchOrdersFailure: ['error'],
+  toggleErrorShown: null
 })
 
 export const OrdersTypes = Types
@@ -30,7 +37,11 @@ export default Creators
 
 export const INITIAL_STATE: StateType = Immutable({
   fetching: false,
-  error: false,
+  error: {
+    message: null,
+    code: null
+  },
+  errorShown: false,
   orders: []
 })
 
@@ -42,13 +53,17 @@ export const request = (state: StateType): StateType =>
 export const success = (path: string): () => mixed => (state: StateType, action: {}): StateType =>
   state.merge({ fetching: false, error: null, [path]: action[path] })
 
-export const failure = (path: string): () => StateType => (state: StateType): StateType =>
-  state.merge({ fetching: false, error: true, [path]: null })
+export const failure = (path: string): () => StateType => (state: StateType, { error }: { error: ErrorType }): StateType =>
+  state.merge({ fetching: false, error, errorShown: true, [path]: null })
+
+export const toggleErrorShown = (state: StateType): StateType =>
+  state.merge({ errorShown: !state.errorShown })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer: (state: StateType, action: {}) => mixed = createReducer(INITIAL_STATE, {
   [Types.FETCH_ORDERS_REQUEST]: request,
   [Types.FETCH_ORDERS_SUCCESS]: success('orders'),
-  [Types.FETCH_ORDERS_FAILURE]: failure('orders')
+  [Types.FETCH_ORDERS_FAILURE]: failure('orders'),
+  [Types.TOGGLE_ERROR_SHOWN]: toggleErrorShown
 })

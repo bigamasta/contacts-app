@@ -8,6 +8,7 @@ import NavigationBar from '../Components/NavigationBar'
 import type NavBarConfigType from '../Components/NavigationBar'
 import ContactDetails from '../Components/ContactDetails'
 import Orders from '../Components/Orders'
+import ErrorAlert from '../Components/ErrorAlert'
 
 import OrdersActions from '../Redux/OrdersRedux'
 import type OrderType from '../Redux/OrdersRedux'
@@ -27,13 +28,16 @@ const OrderScreen = ({ navBarConfig, contactDetails, orders } : PropsType): () =
 
 const mapStateToProps = (state) => {
   return {
-    orders: state.orders.orders
+    orders: state.orders.orders,
+    error: state.orders.error,
+    errorShown: state.orders.errorShown
   }
 }
 
 const mapDispatchToProps = (dispatch: () => mixed): { actions: {} } => ({
   actions: {
-    fetchOrders: () => dispatch(OrdersActions.fetchOrdersRequest())
+    fetchOrders: () => dispatch(OrdersActions.fetchOrdersRequest()),
+    toggleErrorShown: () => dispatch(OrdersActions.toggleErrorShown())
   }
 })
 
@@ -63,6 +67,9 @@ const withLifecycle: () => mixed = lifecycle({
     const { actions: { fetchOrders },
             navigation: { state: { params: { contact: { id } } } } } = this.props
     fetchOrders(id)
+  },
+  componentWillReceiveProps ({ error, errorShown, actions: { toggleErrorShown } }) {
+    error && errorShown && ErrorAlert(error, () => toggleErrorShown())
   }
 })
 

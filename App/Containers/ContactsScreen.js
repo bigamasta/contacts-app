@@ -9,8 +9,9 @@ import NavigationBar from '../Components/NavigationBar'
 import type NavBarConfigType from '../Components/NavigationBar'
 import ContactsList from '../Components/ContactsList'
 import AddContactFAB from '../Components/AddContactFAB'
+import ErrorAlert from '../Components/ErrorAlert'
 
-import OrdersActions from '../Redux/ContactsRedux'
+import ContactsActions from '../Redux/ContactsRedux'
 import type ContactType from '../Redux/ContactsRedux'
 
 type PropsType = {
@@ -31,13 +32,16 @@ const ContactsScreen = ({ navBarConfig, contacts, showFAB, onContactPress, onAdd
 
 const mapStateToProps = (state) => {
   return {
-    contacts: state.contacts.contacts
+    contacts: state.contacts.contacts,
+    error: state.contacts.error,
+    errorShown: state.contacts.errorShown
   }
 }
 
 const mapDispatchToProps = (dispatch: () => mixed): { actions: {} } => ({
   actions: {
-    fetchContacts: () => dispatch(OrdersActions.fetchContactsRequest())
+    fetchContacts: () => dispatch(ContactsActions.fetchContactsRequest()),
+    toggleErrorShown: () => dispatch(ContactsActions.toggleErrorShown())
   }
 })
 
@@ -68,6 +72,9 @@ const withLifecycle = lifecycle({
   componentWillMount () {
     const { actions: { fetchContacts } } = this.props
     fetchContacts()
+  },
+  componentWillReceiveProps ({ error, errorShown, actions: { toggleErrorShown } }) {
+    error && errorShown && ErrorAlert(error, () => toggleErrorShown())
   }
 })
 

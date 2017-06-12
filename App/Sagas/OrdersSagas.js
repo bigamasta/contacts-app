@@ -12,6 +12,7 @@ export function * getOrders (api, { id }) {
     // do data conversion here if needed
     yield put(OrdersActions.fetchOrdersSuccess(orders))
   } else {
-    yield put(OrdersActions.fetchOrdersFailure())
+    const error = path(['data', 'error'], response)
+    yield put(OrdersActions.fetchOrdersFailure(error))
   }
 }

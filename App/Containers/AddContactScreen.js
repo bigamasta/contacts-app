@@ -3,12 +3,13 @@ import React from 'react'
 import { Container } from 'native-base'
 import { connect } from 'react-redux'
 import I18n from 'react-native-i18n'
-import { compose, mapProps } from 'recompose'
+import { compose, mapProps, lifecycle } from 'recompose'
 import AddContactActions from '../Redux/AddContactRedux'
 
 import NavigationBar from '../Components/NavigationBar'
 import type NavBarConfigType from '../Components/NavigationBar'
 import AddContactForm from '../Components/AddContactForm'
+import ErrorAlert from '../Components/ErrorAlert'
 
 type ActionsType = {
   createContact: () => mixed,
@@ -39,7 +40,9 @@ const AddContactScreenScreen = ({ navBarConfig, firstAndLastName, phone,
 const mapStateToProps = (state) => {
   return {
     firstAndLastName: state.addContact.firstAndLastName,
-    phone: state.addContact.phone
+    phone: state.addContact.phone,
+    error: state.addContact.error,
+    errorShown: state.addContact.errorShown
   }
 }
 
@@ -50,7 +53,14 @@ const mapDispatchToProps = (dispatch: () => mixed): { actions: {} } => ({
     setFirstNameAndLastName: (firstAndLastName) =>
       dispatch(AddContactActions.setFirstAndLastName(firstAndLastName)),
     setPhone: (phone) =>
-      dispatch(AddContactActions.setPhone(phone))
+      dispatch(AddContactActions.setPhone(phone)),
+    toggleErrorShown: () => dispatch(AddContactActions.toggleErrorShown())
+  }
+})
+
+const withLifecycle = lifecycle({
+  componentWillReceiveProps ({ error, errorShown, actions: { toggleErrorShown } }) {
+    error && errorShown && ErrorAlert(error, () => toggleErrorShown())
   }
 })
 
@@ -67,8 +77,9 @@ const withNavBarConfig = mapProps(
 )
 
 const enhance = compose(
+  connect(mapStateToProps, mapDispatchToProps),
   withNavBarConfig,
-  connect(mapStateToProps, mapDispatchToProps)
+  withLifecycle
 )
 
 export default enhance(AddContactScreenScreen)

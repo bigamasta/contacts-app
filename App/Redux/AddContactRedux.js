@@ -4,9 +4,15 @@ import Immutable from 'seamless-immutable'
 
 /* ------------- State Type ------------- */
 
+export type ErrorType = {
+  message: string,
+  code: number
+}
+
 type StateType = {
   fetching: boolean,
-  error: boolean,
+  error: ?ErrorType,
+  errorShown: boolean,
   firstAndLastName: string,
   phone: string
 }
@@ -19,7 +25,8 @@ const { Types, Creators }: { Types: Array<string>, Creators: () => mixed } =
     setPhone: ['phone'],
     createContactRequest: ['firstAndLastName', 'phone'],
     createContactSuccess: null,
-    createContactFailure: null
+    createContactFailure: ['error'],
+    toggleErrorShown: null
   })
 
 export const AddContactTypes = Types
@@ -29,7 +36,11 @@ export default Creators
 
 export const INITIAL_STATE: StateType = Immutable({
   fetching: false,
-  error: false,
+  error: {
+    message: null,
+    code: null
+  },
+  errorShown: false,
   firstAndLastName: '',
   phone: ''
 })
@@ -45,8 +56,11 @@ export const request = (state: StateType): StateType =>
 export const success = (state: StateType): StateType =>
   state.merge({ fetching: false, error: null })
 
-export const failure = (state: StateType): StateType =>
-  state.merge({ fetching: false, error: true })
+export const failure = (state: StateType, { error }: { error: ErrorType }): StateType =>
+  state.merge({ fetching: false, error, errorShown: true })
+
+export const toggleErrorShown = (state: StateType): StateType =>
+  state.merge({ errorShown: !state.errorShown })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -55,5 +69,6 @@ export const reducer: (state: StateType, action: {}) => mixed = createReducer(IN
   [Types.SET_PHONE]: merge('phone'),
   [Types.CREATE_CONTACT_REQUEST]: request,
   [Types.CREATE_CONTACT_SUCCESS]: success,
-  [Types.CREATE_CONTACT_FAILURE]: failure
+  [Types.CREATE_CONTACT_FAILURE]: failure,
+  [Types.TOGGLE_ERROR_SHOWN]: toggleErrorShown
 })
