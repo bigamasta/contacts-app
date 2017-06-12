@@ -1,3 +1,4 @@
+import Colors from '../../Themes/Colors'
 // No StyleSheet.create
 // Problem: https://github.com/GeekyAnts/NativeBase/issues/884
 export default {
@@ -6,7 +7,7 @@ export default {
     paddingRight: 30,
     paddingTop: 10,
     paddingBottom: 10,
-    backgroundColor: '#57e06c'
+    backgroundColor: Colors.info
   },
   detailKey: {
     fontWeight: 'bold'
