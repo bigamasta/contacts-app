@@ -35,11 +35,14 @@ export const INITIAL_STATE: StateType = Immutable({
 
 /* ------------- Reducers ------------- */
 
-export const setFirstAndLastName = (state: StateType, { firstAndLastName }: { firstAndLastName: string }): StateType =>
-  state.merge({ firstAndLastName })
+// export const firstAndLastName = (state: StateType, { firstAndLastName }: { firstAndLastName: string }): StateType =>
+//   state.merge({ firstAndLastName })
+//
+// export const phone = (state: StateType, { phone }: { phone: string }): StateType =>
+//   state.merge({ phone })
 
-export const setPhone = (state: StateType, { phone }: { phone: string }): StateType =>
-  state.merge({ phone })
+const merge = (path: string) => (state: StateType, action): StateType =>
+  state.merge({ [path]: action[path] })
 
 export const request = (state: StateType): StateType =>
   state.merge({ fetching: true })
@@ -53,8 +56,8 @@ export const failure = (state: StateType): StateType =>
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.SET_FIRST_AND_LAST_NAME]: setFirstAndLastName,
-  [Types.SET_PHONE]: setPhone,
+  [Types.SET_FIRST_AND_LAST_NAME]: merge('firstAndLastName'),
+  [Types.SET_PHONE]: merge('phone'),
   [Types.CREATE_CONTACT_REQUEST]: request,
   [Types.CREATE_CONTACT_SUCCESS]: success,
   [Types.CREATE_CONTACT_FAILURE]: failure

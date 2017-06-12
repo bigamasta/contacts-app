@@ -8,17 +8,21 @@ import AddContactActions from '../Redux/AddContactRedux'
 import NavigationBar from '../Components/NavigationBar'
 import AddContactForm from '../Components/AddContactForm'
 
-const AddContactScreenScreen = ({ navBarConfig, actions: { createContact }, setFirstNameAndLastName, setPhone }) =>
+const AddContactScreenScreen = ({ navBarConfig, firstAndLastName, phone, actions: { createContact, setFirstNameAndLastName, setPhone } }) =>
   <Container>
     <NavigationBar {...navBarConfig} />
     <AddContactForm
       onSubmit={createContact}
       onFirstNameAndLastNameChange={setFirstNameAndLastName}
-      onPhoneChange={setPhone} />
+      onPhoneChange={setPhone}
+      firstAndLastName={firstAndLastName}
+      phone={phone} />
   </Container>
 
 const mapStateToProps = (state) => {
   return {
+    firstAndLastName: state.addContact.firstAndLastName,
+    phone: state.addContact.phone
   }
 }
 
@@ -27,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
     createContact: (firstAndLastName, phone) =>
       dispatch(AddContactActions.createContactRequest(firstAndLastName, phone)),
     setFirstNameAndLastName: (firstAndLastName) =>
-      dispatch(AddContactActions.setFirstNameAndLastName(firstAndLastName)),
+      dispatch(AddContactActions.setFirstAndLastName(firstAndLastName)),
     setPhone: (phone) =>
       dispatch(AddContactActions.setPhone(phone))
   }
