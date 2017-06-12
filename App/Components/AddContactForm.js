@@ -1,9 +1,10 @@
 // @flow
 import React from 'react'
-import I18n from 'react-native-i18n'
 import { Container, Content, Form, Item, Input, Button, Text } from 'native-base'
+import I18n from 'react-native-i18n'
 import { mapProps } from 'recompose'
 import ErrorAlert from './ErrorAlert'
+import styles from './Styles/AddContactFormStyles'
 
 type PropsType = {
   onSubmit: () => mixed,
@@ -29,13 +30,13 @@ const validateForm = (firstAndLastName: string, phone: string): void => {
 
 const AddContactForm = ({ onSubmit, onFirstNameAndLastNameChange, onPhoneChange,
   firstAndLastName, phone, callback }: PropsType): React$Element<*> =>
-    <Container>
+    <Container style={styles.marginful}>
       <Content>
         <Form>
-          <Item>
+          <Item underline>
             <Input placeholder={I18n.t('firstAndLastName')} onChangeText={onFirstNameAndLastNameChange} />
           </Item>
-          <Item last>
+          <Item underline>
             <Input placeholder={I18n.t('phone')} onChangeText={onPhoneChange} keyboardType='phone-pad' />
           </Item>
           <Button block onPress={() => onSubmit(firstAndLastName, phone, callback)}>
