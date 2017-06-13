@@ -15,7 +15,7 @@ type PropsType = {
   avatarPhantom: () => mixed
 }
 
-const ContactListItem = ({ avatarPhantom, contact, contact: { name, phone, pictureUrl }, onContactPress }: PropsType): () => mixed =>
+const ContactListItem = ({ avatarPhantom, contact, contact: { name, phone, pictureUrl }, onContactPress }: PropsType): () => React$Element<*> =>
   <View style={styles.item}>
     <ListItem avatar button onPress={() => onContactPress(contact)}>
       <Left>
